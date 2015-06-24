@@ -1,0 +1,79 @@
+---
+title: "analyse initiale"
+author: "jcb"
+date: "24 juin 2015"
+output: html_document
+---
+```{r init, echo=FALSE}
+library(knitr)
+```
+
+Apprenants
+==========
+```{r}
+file <- "../data/apprenants_2015-06-22.csv"
+ap <- read.csv(file)
+names(ap)
+```
+
+Groupes
+-------
+- nombre de groupes: `r length(unique(ap$Groupe_ID))`
+- nombre d'apprenants par groupes:
+```{r groupe, echo=FALSE, comment=""}
+g <- tapply(ap$ID_Etud, ap$Groupe_ID, length)
+g
+g.m <- mean(g)
+g.r <- range(g)
+```
+- nombre moyen d'apprenants par groupe: `r g.m`
+- étendue: `r g.r[1]` - `r g.r[2]`
+
+Rôle
+----
+```{r role, echo=FALSE,comment=""}
+summary(as.factor(ap$ROLE))
+
+```
+
+Répartition des apprenants par groupes
+---------------------------------------
+```{r app_gr, echo=FALSE,comment=""}
+table(ap$ROLE, ap$Groupe_ID,dnn = c("APPRENANTS","GROUPE"))
+```
+
+Sexe
+----
+```{r sex, echo=FALSE, comment=""}
+summary(as.factor(ap$SEXE))
+
+```
+
+Profession
+----------
+```{r prof, echo=FALSE, comment=""}
+summary(ap$PROF)
+
+```
+
+Etudes
+------
+```{r etudes, echo=FALSE, comment=""}
+summary(ap$ETUDE)
+summary(as.factor(ap$ETUDE))
+
+```
+FDP
+---
+```{r fdp, echo=FALSE, comment=""}
+summary(ap$FDP)
+
+```
+
+FMN
+---
+```{r fmn, echo=FALSE,comment=""}
+summary(ap$FMN)
+
+```
+

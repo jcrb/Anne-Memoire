@@ -1,0 +1,57 @@
+ID_Etud,Groupe_ID,SMI,FDP,FMN,PROF,ETUDE,SEXE,ROLE,Nature de la formation (NAT)
+1,1,plusieurs fois par an,O,O,DESC AN,4,F,INTERNE,"COURS DCEM, STAGE, SIMULATION"
+2,1,plusieurs fois par an,O,O,DESC AN,4,M,OBSERVATEUR,
+3,1,plusieurs fois par an,N,N,DESC AN,4,F,OBSERVATEUR,
+4,1,plusieurs fois par mois,O,O,DESC AN,4,M,OBSERVATEUR,SIMULATION
+1,2,plusieurs fois par semaine,O,N,ETUDIANT,7,M,INTERNE,
+2,2,plusieurs fois par an,N,O,DESC MU,1,F,EXTERNE,COURS DCEM
+3,2,plusieurs fois par an,O,O,ETUDIANT,8,M,OBSERVATEUR,
+4,2,plusieurs fois par mois,O,N,DESC AN,3,F,OBSERVATEUR,COURS DES
+1,3,plusieurs fois par an,O,O,ETUDIANT,7,M,OBSERVATEUR,COURS DES
+2,3,plusieurs fois par an,N,O,ETUDIANT,8,M,INTERNE,COURS
+3,3,jamais,N,O,ETUDIANT,8,F,EXTERNE,COURS
+4,3,plusieurs fois par an,N,N,ETUDIANT,7,F,IDE,
+5,3,plusieurs fois par mois,N,O,ETUDIANT,,M,OBSERVATEUR,COURS
+1,4,jamais,N,O,ETUDIANT,6,F,OBSERVATEUR,
+2,4,plusieurs fois par an,N,N,ETUDIANT,6,M,EXTERNE,
+3,4,plusieurs fois par an,N,N,ETUDIANT,6,F,EXTERNE,
+4,4,plusieurs fois par an,O,O,ETUDIANT,6,M,OBSERVATEUR,COURS
+5,4,plusieurs fois par an,O,O,ETUDIANT,6,M,OBSERVATEUR,COURS
+6,4,plusieurs fois par mois,O,O,ETUDIANT,6,F,OBSERVATEUR,STAGE
+7,4,plusieurs fois par an,N,O,ETUDIANT,6,F,OBSERVATEUR,
+8,4,plusieurs fois par an,N,O,ETUDIANT,6,M,OBSERVATEUR,COURS
+9,4,plusieurs fois par an,N,O,ETUDIANT,6,M,OBSERVATEUR,COURS
+10,4,plusieurs fois par an,O,O,ETUDIANT,6,M,INTERNE,COURS DCEM 3
+11,4,plusieurs fois par mois,N,N,ETUDIANT,6,M,IDE,
+1,5,plusieurs fois par an,N,O,ETUDIANT,6,F,IDE,
+2,5,plusieurs fois par an,O,O,ETUDIANT,6,M,INTERNE,
+3,5,plusieurs fois par an,O,O,ETUDIANT,6,F,EXTERNE,STAGE
+4,5,plusieurs fois par an,N,O,ETUDIANT,6,F,OBSERVATEUR,COURS
+5,5,plusieurs fois par an,O,O,ETUDIANT,6,F,EXTERNE,
+6,5,jamais,N,O,ETUDIANT,6,F,OBSERVATEUR,"COURS, TP, TD, JEUX DE ROLE"
+7,5,plusieurs fois par an,O,O,ETUDIANT,6,F,OBSERVATEUR,
+8,5,plusieurs fois par an,O,O,ETUDIANT,6,F,OBSERVATEUR,COURS FAC
+1,6,jamais,N,N,ETUDIANT,6,M,EXTERNE,
+2,6,plusieurs fois par an,N,O,ETUDIANT,6,F,INTERNE,
+3,6,jamais,O,N,ETUDIANT,6,F,OBSERVATEUR,AFGSU
+4,6,plusieurs fois par an,N,O,ETUDIANT,6,M,OBSERVATEUR,TD DCEM1
+5,6,plusieurs fois par an,N,O,ETUDIANT,6,F,EXTERNE,TD PSYCHO ET ONCO
+6,6,plusieurs fois par an,N,N,ETUDIANT,6,F,IDE,
+1,7,plusieurs fois par an,N,O,ETUDIANT,6,F,INTERNE,STAGE
+2,7,plusieurs fois par an,N,N,ETUDIANT,6,M,OBSERVATEUR,
+3,7,plusieurs fois par an,O,O,ETUDIANT,6,F,OBSERVATEUR,
+4,7,plusieurs fois par an,N,N,ETUDIANT,6,F,OBSERVATEUR,
+5,7,plusieurs fois par an,N,N,ETUDIANT,6,F,OBSERVATEUR,
+6,7,plusieurs fois par an,O,N,ETUDIANT,6,F,EXTERNE,SIMULATION
+7,7,jamais,N,N,ETUDIANT,6,F,IDE,
+8,7,jamais,N,N,ETUDIANT,6,M,EXTERNE,
+1,8,plusieurs fois par an,N,O,ETUDIANT,6,F,OBSERVATEUR,"COURS, TP PSY"
+2,8,plusieurs fois par an,N,N,ETUDIANT,6,M,OBSERVATEUR,
+3,8,plusieurs fois par semaine,N,N,ETUDIANT,6,F,OBSERVATEUR,
+4,8,plusieurs fois par an,O,N,ETUDIANT,6,M,OBSERVATEUR,
+5,8,jamais,N,N,ETUDIANT,6,F,EXTERNE,
+6,8,jamais,N,N,ETUDIANT,6,F,IDE,
+7,8,plusieurs fois par an,N,N,ETUDIANT,6,F,OBSERVATEUR,
+8,8,plusieurs fois par an,N,O,ETUDIANT,6,M,INTERNE,
+9,8,plusieurs fois par an,N,O,ETUDIANT,6,F,EXTERNE,SEMINAIRE D'ETHIQUE
+10,8,plusieurs fois par an,N,N,ETUDIANT,6,F,OBSERVATEUR,

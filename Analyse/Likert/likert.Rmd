@@ -1,0 +1,15 @@
+---
+title: "Likert"
+author: "jcb"
+date: "24 juin 2015"
+output: html_document
+---
+
+```{r init, echo=FALSE}
+library(likert)
+file <- "../data/likert_avant_2015-06-22.csv"
+lk.av <- read.csv(file)
+file <- "../data/likert_apres_2015-06-22.csv"
+lk.ap <- read.csv(file)
+```
+
