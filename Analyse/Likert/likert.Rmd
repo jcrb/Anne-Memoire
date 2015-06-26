@@ -7,9 +7,62 @@ output: html_document
 
 ```{r init, echo=FALSE}
 library(likert)
-file <- "../data/likert_avant_2015-06-22.csv"
+file <- "../../data/likert_avant_2015-06-22.csv"
 lk.av <- read.csv(file)
-file <- "../data/likert_apres_2015-06-22.csv"
+file <- "../../data/likert_apres_2015-06-22.csv"
 lk.ap <- read.csv(file)
+```
+
+Les items de Likert correspondent aux colonnes 4 à 15
+```{r}
+lik.av <- lk.av[, c(4:15)]
+lik.ap <- lk.ap[, c(4:15)]
+
+likert(lik.av, nlevels = 8)
+plot(likert(lik.av, nlevels = 8))
+
+likert(lik.ap, nlevels = 8)
+plot(likert(lik.ap, nlevels = 8))
+
+```
+
+Note: pour étudier une colonne seule, il faut utiliser la syntaxe suivante:
+```{r, warning=FALSE}
+q1a <- lk.av[, 4, drop = FALSE]
+# plot likert
+plot(likert(q1a,nlevels = 8))
+# summary spécifique
+summary(likert(q1a,nlevels = 8))
+# %
+likert(q1a, nlevels = 8)
+# nombre
+table(q1a)
+
+```
+
+Q1 avant et après
+```{r Q1, warning=FALSE}
+q1a <- lk.av[, 4, drop = FALSE]
+q1p <- lk.ap[, 4, drop = FALSE]
+q1 <- cbind(q1p, q1a)
+names(q1) <- c("Q1.Ap","Q1.Av")
+plot(likert(q1, nlevels = 8))
+likert(q1, nlevels = 8)
+likert.bar.plot(likert(q1, nlevels = 8), main = "Q1")
+likert.heat.plot(likert(q1, nlevels = 8), main = "Q1")
+likert.density.plot(likert(q1, nlevels = 8), main = "Q1", warning = FALSE)
+
+summary(likert(q1, nlevels = 8))
+
+# test du chi2 pour comparer avant-après
+c <- likert(q1, nlevels = 8)
+# c est un objet de type likert dont il faut extraire les données (voir str(c))
+d <- c$results[,2:9]
+# on regroupe les colonnes 6 et 7 pour avoir des effectifs convenables
+d[,6] <-d[,6]+d[,7]
+# test en éliminant le colonne 8 qui est nulle
+chisq.test(d[, 1:6])
+
+
 ```
 
