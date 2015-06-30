@@ -2,11 +2,16 @@
 title: "Likert"
 author: "jcb"
 date: "24 juin 2015"
-output: html_document
+output:
+  pdf_document:
+    number_sections: yes
+    toc: yes
 ---
 
 ```{r init, echo=FALSE}
 library(likert)
+options(digits = 3)
+
 file <- "../../data/likert_avant_2015-06-22.csv"
 lk.av <- read.csv(file)
 file <- "../../data/likert_apres_2015-06-22.csv"
@@ -14,17 +19,30 @@ lk.ap <- read.csv(file)
 ```
 
 Les items de Likert correspondent aux colonnes 4 à 15
-```{r}
+
+Scores de Likert avant
+-----------------------
+```{r score_avant, warning=FALSE, echo=FALSE}
+# score de Likert avant et après
 lik.av <- lk.av[, c(4:15)]
-lik.ap <- lk.ap[, c(4:15)]
 
 likert(lik.av, nlevels = 8)
 plot(likert(lik.av, nlevels = 8))
+summary(lik.av, nlevels = 8)
+
+```
+
+Score de Likert après
+---------------------
+```{r score_après, warning=FALSE, echo=FALSE}
+lik.ap <- lk.ap[, c(4:15)]
 
 likert(lik.ap, nlevels = 8)
 plot(likert(lik.ap, nlevels = 8))
+summary(lik.ap, nlevels = 8)
 
 ```
+
 
 Note: pour étudier une colonne seule, il faut utiliser la syntaxe suivante:
 ```{r, warning=FALSE}

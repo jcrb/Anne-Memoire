@@ -10,10 +10,12 @@ library(knitr)
 
 Apprenants
 ==========
-```{r}
+```{r names, echo=FALSE}
 file <- "../data/apprenants_2015-06-22.csv"
 ap <- read.csv(file)
 names(ap)
+
+# pb pour différencier les groupes avec et sans prébriefing. Que signifie FDP et FMN . Pourquoi certaines lignes sont identiques (2 fois O ou N) ?
 ```
 
 Groupes
