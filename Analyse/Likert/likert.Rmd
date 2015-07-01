@@ -80,7 +80,6 @@ q1p <- lk.ap[, 4, drop = FALSE]
 q1 <- cbind(q1p, q1a)
 names(q1) <- c("Q1.Ap","Q1.Av")
 plot(likert(q1, nlevels = 8))
-likert(q1, nlevels = 8)
 likert.bar.plot(likert(q1, nlevels = 8), main = "Q1")
 likert.heat.plot(likert(q1, nlevels = 8), main = "Q1")
 likert.density.plot(likert(q1, nlevels = 8), main = "Q1", warning = FALSE)
