@@ -16,7 +16,13 @@ ap <- read.csv(file)
 names(ap)
 
 # pb pour différencier les groupes avec et sans prébriefing. Que signifie FDP et FMN . Pourquoi certaines lignes sont identiques (2 fois O ou N) ?
+# dans le tableau des stat, sur la page formateur il y a une colonne pré birefing. tous les étudiants des groupes 2, 3, 7 et 8 ont eu un pre-briefing spécifique sur la mort possible du mannequin. les groupes 1,4,5 et 6 n'ont eu que le briefing classique.
+#FDP c'est s'ils avaient dejà eu des cours auparavant sur la gestion de la mort
+#FMN c'est s'ils avaient dejà eu des cours auparavant sur l'annonce de mauvaises nouvelles
+
+# faire un score avec les 8 premier items
 ```
+
 
 Groupes
 -------
@@ -77,5 +83,21 @@ FMN
 ```{r fmn, echo=FALSE,comment=""}
 summary(ap$FMN)
 
+```
+Création d'une colonne pré-briefing
+====================================
+```{r preb, echo=FALSE, comment=""}
+# création d'une colonne PREB selon que l'apprenant ait eu ou non un prébriefing
+ap$PREB <- NA
+ap$PREB[ap$Groupe_ID %in% c(2, 3, 7, 8)] <- "O"
+ap$PREB[ap$Groupe_ID %in% c(1,4,5, 6)] <- "N"
+table(ap$PREB, dnn = "Pré-briefing")
+
+```
+
+Sexe et préb
+------------
+```{r}
+table(ap$SEXE, ap$PREB)
 ```
 

@@ -1,5 +1,5 @@
 ---
-title: "Likert"
+title: "Mémoire d'Anne Weiss: score deLikert"
 author: "jcb"
 date: "24 juin 2015"
 output:
@@ -16,6 +16,21 @@ file <- "../../data/likert_avant_2015-06-22.csv"
 lk.av <- read.csv(file)
 file <- "../../data/likert_apres_2015-06-22.csv"
 lk.ap <- read.csv(file)
+# suppression des colonnes éxcédentaires
+lk.ap <- lk.ap[, 1:15]
+# renommer les colonnnes avant et après
+a <- names(lk.av)
+a <- c(a[1:3], paste(a[4:15],".av", sep = ""))
+names(lk.av) <- a
+
+a <- names(lk.ap)
+a <- c(a[1:3], paste(a[4:15],".ap", sep = ""))
+names(lk.ap) <- a
+# tableau global
+lkt <- cbind(lk.av, lk.ap[, 4:12])
+# ajout colonne PREB
+lkt$PREB[lkt$Groupe_ID %in% c(2, 3, 7, 8)] <- "O"
+lkt$PREB[lkt$Groupe_ID %in% c(1,4,5, 6)] <- "N"
 ```
 
 Les items de Likert correspondent aux colonnes 4 à 15
@@ -34,7 +49,7 @@ summary(lik.av, nlevels = 8)
 
 Score de Likert après
 ---------------------
-```{r score_après, warning=FALSE, echo=FALSE}
+```{r score_apres, warning=FALSE, echo=FALSE}
 lik.ap <- lk.ap[, c(4:15)]
 
 likert(lik.ap, nlevels = 8)
