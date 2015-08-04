@@ -1,24 +1,35 @@
 ---
-title: "Mémoire d'Anne Weiss: score deLikert"
+title: 'Mémoire d''Anne Weiss: SEP et pré-briefing'
 author: "jcb"
 date: "24 juin 2015"
 output:
+  html_document:
+    keep_md: yes
+    toc: yes
   pdf_document:
     number_sections: yes
     toc: yes
 ---
 
-```{r init, echo=FALSE}
+
+Lecture des fichiers
+====================
+
+```{r init, echo=FALSE, comment="", message=FALSE}
 library(likert)
 options(digits = 3)
 
-file <- "../../data/likert_avant_2015-06-22.csv"
+path <- "../../" # path <- "" en mode console
+
+# questionnaire avant
+file <- paste0(path, "data/likert_avant_2015-06-22.csv")
 lk.av <- read.csv(file)
-file <- "../../data/likert_apres_2015-06-22.csv"
+# questionnaire après
+file <- paste0(path, "data/likert_apres_2015-06-22.csv")
 lk.ap <- read.csv(file)
 # suppression des colonnes éxcédentaires
 lk.ap <- lk.ap[, 1:15]
-# renommer les colonnnes avant et après
+# renommer les colonnnes avant et après: on ne modifie pas le nom des 3 premières colonnes; on rajoute au nom des colonnes 4 à 15 le suffixe .av (ou .ap)
 a <- names(lk.av)
 a <- c(a[1:3], paste(a[4:15],".av", sep = ""))
 names(lk.av) <- a
@@ -26,14 +37,250 @@ names(lk.av) <- a
 a <- names(lk.ap)
 a <- c(a[1:3], paste(a[4:15],".ap", sep = ""))
 names(lk.ap) <- a
+
 # tableau global
 lkt <- cbind(lk.av, lk.ap[, 4:12])
 # ajout colonne PREB
 lkt$PREB[lkt$Groupe_ID %in% c(2, 3, 7, 8)] <- "O"
 lkt$PREB[lkt$Groupe_ID %in% c(1,4,5, 6)] <- "N"
+
+# fichier des caractéristiques des apprenants
+file <- paste0(path, "data/apprenants_2015-06-22.csv")
+app <- read.csv(file)
+# ajout colonne PREB
+app$PREB[app$Groupe_ID %in% c(2, 3, 7, 8)] <- "O"
+app$PREB[app$Groupe_ID %in% c(1,4,5, 6)] <- "N"
+
+```
+Fichier des apprenants:
+```{r app, echo=FALSE, comment=""}
+names(app)
 ```
 
+Questionnaire "avant" (lk.av):
+```{r lk_av, echo = FALSE, comment=""}
+names(lk.av)
+```
+Questionnaire après (lk.ap):
+```{r lk_ap, echo = FALSE, comment=""}
+names(lk.ap)
+```
 Les items de Likert correspondent aux colonnes 4 à 15
+
+On forme un fichier global par combinaison des questionnaires _avant_ et _après_. Ajout d'une colonne __PREB__ (O/N) pour identifier le groupe ayant bénéficié d'un prébriefing.
+```{r lkt, echo=FALSE, comment=""}
+names(lkt)
+```
+
+Analyse des groupes avec et sans prebriefing
+============================================
+
+Toutes les caractéristiques des groupes sont de nature qualitative. Le test approprié pour les comparer est le test du Chi2 (avec correction de continuité de Yates). Cependant les effectifs sont faibles et lorsque les conditions d'application du chi2 ne sont pas respectées, des effectifs ont été regroupés (années d'étude) et/ou le test exact de Fisher a été utilisé. Les goupes sont considérés comme différents si _p-value_ est plus petite que 0.05.
+
+Sexe sdes apprenants
+---------------------
+```{r sexe, echo=FALSE, comment=""}
+# sexe
+table(app$SEXE, app$PREB, dnn = c("Sexe", "PREB"))
+c <- chisq.test(table(app$SEXE, app$PREB))
+```
+La répartition des hommes et des femmes est identique dans deux groupes (p = `r c$p.value`
+)
+
+SMI (situation de mort inattendue)
+----------------------------------
+```{r smi, echo=FALSE, comment=""}
+# SMI situation de mort inattendue
+table(app$SMI, app$PREB, dnn = c("SMI", "PREB"))
+f <- fisher.test(table(app$SMI, app$PREB))
+```
+Pas de différence entre les deux groupes (p = `r f$p.value`)
+
+FDP formation décès patient
+---------------------------
+```{r fdp, echo=FALSE, comment=""}
+# FDP formation décès patient
+table(app$FDP, app$PREB, dnn = c("FDP", "PREB"))
+c <- chisq.test(table(app$FDP, app$PREB))
+```
+Pas de différence entre les deux groupes (p = `r c$p.value`)
+
+FMN formation annonce mauvaise nouvelle
+---------------------------------------
+```{r FMN, echo=FALSE, comment=""}
+# FMN formation annonce mauvaise nouvelle
+table(app$FMN, app$PREB, dnn = c("FMN", "PREB"))
+c <- chisq.test(table(app$FMN, app$PREB))
+```
+__Différence significative__ entre les deux groupes (p = `r c$p.value`)
+
+Profession
+----------
+```{r prof, echo=FALSE, comment=""}
+# PROF profession
+table(app$PROF, app$PREB, dnn = c("PROF", "PREB"))
+f <- fisher.test(table(app$SMI, app$PREB, dnn = c("Profession", "PREB")))
+```
+Pas de différence entre les deux groupes (p = `r f$p.value`)
+
+Rôle dans la simulation
+-----------------------
+```{r role, echo=FALSE, comment=""}
+# ROLE
+table(app$ROLE, app$PREB, dnn = c("ROLE", "PREB"))
+f <- fisher.test(table(app$ROLE, app$PREB, dnn = c("ROLE", "PREB")))
+```
+Pas de différence entre les deux groupes (p = `r f$p.value`)
+
+Années d'étude
+--------------
+
+```{r annee, echo=FALSE,comment=""}
+
+# Années d'étude ETUDE
+table(app$ETUDE, app$PREB, dnn = c("Années d'études", "PREB"))
+# regroupement
+t <- table(app$ETUDE, app$PREB)
+r <- rbind(apply(t[1:3,], 2, sum), apply(t[4:6,], 2, sum))
+rownames(r) <- c("moins de 6 ans", "6 ans ou plus")
+r
+f <- fisher.test(r)
+
+```
+Pas de différence entre les deux groupes (p = `r f$p.value`)
+
+__Conclusion: les groupes avec et sans prébriefing ne sont pas différents sauf en ce qui concerne la formation à l'annonce d'une mauvaise nouvelle.__
+
+Analyse du sentiment d'efficacité personnel (SEP)
+=================================================
+
+Le SEP est mesuré sur les 8 premiers items du score de Likert (validé) et sur les 12 items (expérimental).
+
+Pré-test
+-----------------------
+```{r sep_avant, echo=FALSE}
+# Ajout d'une colonne SEP12 au fichier lk.av (SEP expérimental)
+lk.av$SEP12 <- apply(lk.av[4:15], 1, sum)
+# Ajout d'une colonne SEP8 au fichier lk.av (SEP validé)
+lk.av$SEP8 <- apply(lk.av[4:11], 1, sum)
+# ajout colonne PREB
+lk.av$PREB[lk.av$Groupe_ID %in% c(2, 3, 7, 8)] <- "O"
+lk.av$PREB[lk.av$Groupe_ID %in% c(1,4,5, 6)] <- "N"
+```
+### SEP8
+```{r sep_avant_sep8, echo=FALSE}
+# analyse SEP8
+
+s <- summary(lk.av$SEP8)
+sd <- sd(lk.av$SEP8, na.rm = TRUE)
+hist(lk.av$SEP8, xlab = "SEP 8", ylab = "Fréquence", main = "Histogramme des scores de Likert avant (8 items)", col = "cornflowerblue", border = "white")
+
+# box plot
+boxplot(SEP8 ~ PREB, data = lk.av, ylab = "SEP8", xlab = "Pré-briefing", main = "Score SEP8 avant la formation", col = "cornflowerblue")
+
+```
+
+- moyenne SEP8: $`r s["Mean"]` \pm{`r sd`}$
+- médiane SEP8: $`r s["Median"]`$
+
+### SEP12
+```{r sep_avant_sep12, echo=FALSE}
+# Analyse du SEP12
+s <- summary(lk.av$SEP12)
+sd <- sd(lk.av$SEP12, na.rm = TRUE)
+hist(lk.av$SEP12, xlab = "SEP 12", ylab = "Fréquence", main = "Histogramme des scores de Likert avant (12 items)", col = "palegreen", border = "white")
+```
+
+- moyenne SEP12: $`r s["Mean"]` \pm{`r sd`}}$
+- médiane SEP12: $`r s["Median"]`$
+
+Comparaison du SEP avant la formation, selon que les apprenants aient bénéficiés ou non d'un prébriefing (Test T de Student):
+
+```{r ttest_pre, echo=FALSE, comment=""}
+# comparaisons des groupes avec et sans prébriefing
+t1 <- t.test(SEP8 ~ PREB, data = lk.av)
+t2 <- t.test(SEP12 ~ PREB, data = lk.av)
+```
+- SEP8: pas de différence (p = `r t1$p.value`)
+- SEP12: pas de différence (p = `r t2$p.value`)
+
+
+
+__Conclusion__: les groupes ne sont pas différents en ce qui concerne le sentiment d'efficacité personnel avant la formation.
+
+Post-test
+-----------------------
+```{r SEP_apres, echo=FALSE}
+# Ajout d'une colonne SEP12 au fichier lk.av (SEP expérimental)
+lk.ap$SEP12 <- apply(lk.ap[4:15], 1, sum)
+# Ajout d'une colonne SEP8 au fichier lk.ap (SEP validé)
+lk.ap$SEP8 <- apply(lk.ap[4:11], 1, sum)
+# ajout colonne PREB
+lk.ap$PREB[lk.ap$Groupe_ID %in% c(2, 3, 7, 8)] <- "O"
+lk.ap$PREB[lk.ap$Groupe_ID %in% c(1,4,5, 6)] <- "N"
+
+# analyse SEP8
+
+summary(lk.ap$SEP8)
+sd(lk.ap$SEP8)
+hist(lk.ap$SEP8, xlab = "SEP 8", ylab = "Fréquence", main = "Histogramme des scores de Likert après(8 items)")
+
+# analyse du SEP12
+
+summary(lk.ap$SEP12)
+sd(lk.ap$SEP12)
+hist(lk.ap$SEP12, xlab = "SEP 12", ylab = "Fréquence", main = "Histogramme des scores de Likert après (12 items)")
+
+# comparaisons des groupes avec et sans prébriefing
+t.test(SEP8 ~ PREB, data = lk.ap)
+t.test(SEP12 ~ PREB, data = lk.ap)
+
+```
+
+__Conclusion__: après la formation, le SEP à progressé mais dans les mêmes proportions dans les deux groupes et il n'y a pas de différence de entre les SEP que le groupe ait bénéficié ou pas d'un prébriefing. 
+
+Est-ce que la formation a une influence sur le SEP?
+----------------------------------------------------
+Pour répondre à la question, on compare le SEP avant et après la formation:
+
+### SEP12
+```{r sep12_avap, echo=FALSE, comment=""}
+# SEP 12
+t <- t.test(lk.av$SEP12, lk.ap$SEP12)
+```
+- SEP12: __différence très significative__ (p = `r t$p.value`)
+
+### SEP8
+```{r sep8_avap, echo=FALSE, comment=""}
+# SEP 8
+t <- t.test(lk.av$SEP8, lk.ap$SEP8)
+```
+- le score SEP8 est passé de `r t$estimate[1]` avant la formation à `r t$estimate[2]` après.
+- SEP8: __différence très significative__ (p = `r t$p.value`)
+
+__Conclusion__: dans les 2 cas le SEP progresse fortement et significativement. La formation a un effet positif sur l'évolution du SEP. 
+
+### Analyse en sous groupes: A suivre...
+
+```{r sep_avap, echo=FALSE, comment=""}
+
+# dans les 2 cas le SEP progresse fortement. La formation a un effet positif sur l'évolution du SEP. NB faire le test pour séries appariées.
+
+# Analyse en sous-groupes:
+# avant avec prébriefing
+t.test(lk.av$SEP8[lk.av$PREB == "O"], lk.ap$SEP8[lk.ap$PREB == "O"])
+# avant sans prébriefing
+t.test(lk.av$SEP8[lk.av$PREB == "N"], lk.ap$SEP8[lk.ap$PREB == "N"])
+# après avec prebriefing
+t.test(lk.av$SEP12[lk.av$PREB == "O"], lk.ap$SEP12[lk.ap$PREB == "O"])
+# après sans prébriefing
+t.test(lk.av$SEP12[lk.av$PREB == "N"], lk.ap$SEP12[lk.ap$PREB == "N"])
+
+```
+Evaluer le nombre de sujets nécessaires.
+
+Résultats préliminaires
+=======================
 
 Scores de Likert avant
 -----------------------
@@ -95,6 +342,69 @@ d[,6] <-d[,6]+d[,7]
 # test en éliminant le colonne 8 qui est nulle
 chisq.test(d[, 1:6])
 
+
+```
+
+Cronbach alpha
+==============
+
+On utilise la formule _alpha_ du package _epîcalc_. Calcul du coefficient de Cronbach pour les questions avant / après et pour la totalité des 12 items et les 8 premiers:
+
+```{r cronbach, echo=FALSE, comment=""}
+
+library("epicalc")
+
+use(lk.av)
+alpha(Q1.av:Q12.av)
+alpha(Q1.av:Q8.av)
+use(lk.ap)
+alpha(Q1.ap:Q8.ap)
+alpha(Q1.ap:Q12.ap)
+
+```
+La consistance interne parait bonne.
+
+Score sur les 8 premières questions
+===================================
+
+```{r score}
+
+lkt$score.av <- apply(lkt[, c(4:11)], 1, sum, na.rm = TRUE)
+lkt$score.ap <- apply(lkt[, c(16:23)], 1, sum, na.rm = TRUE)
+
+summary(lkt$score.av)
+summary(lkt$score.ap)
+
+# création d'une colonne delta.score qui fait la différence avant/après. Onconstate que le score peut augmenter, diminuer ou ne pas bouger.
+lkt$delta.score <- lkt$score.ap - lkt$score.av
+
+# Comparaison des scores av et pré-briefing ou non
+boxplot(score.av ~ PREB, data = lkt)
+t.test(score.av ~ PREB, data = lkt)
+
+# Comparaison des scores ap et pré-briefing ou non
+boxplot(score.ap ~ PREB, data = lkt)
+t.test(score.ap ~ PREB, data = lkt)
+
+use(lkt)
+
+# comparaison des scores des différents groupes
+boxplot(score.av ~ Groupe_ID, data = lkt)
+boxplot(score.ap ~ Groupe_ID, data = lkt)
+
+# l'ANOVA confirme que les groupes n'ont pas les mêmes scores
+a <- aov(score.av ~ Groupe_ID, data = lkt)
+summary(a)
+a2 <- aov(score.ap ~ Groupe_ID, data = lkt)
+summary(a2)
+
+# évolution des scores moyens par groupes
+tapply(score.av, Groupe_ID, mean)
+tapply(score.ap, Groupe_ID, mean)
+
+# évolution des scores moyens par groupes et prebriefing
+tapply(score.av, list(Groupe_ID, lkt$PREB), mean)
+tapply(score.ap, list(Groupe_ID, lkt$PREB), mean)
 
 ```
 
