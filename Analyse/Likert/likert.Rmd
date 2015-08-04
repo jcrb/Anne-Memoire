@@ -408,3 +408,13 @@ tapply(score.ap, list(Groupe_ID, lkt$PREB), mean)
 
 ```
 
+Information de session
+======================
+
+Informations pour le chapitre matériel et méthode.
+
+```{r session, echo=FALSE, comment=""}
+sessionInfo()
+
+citation()
+```
