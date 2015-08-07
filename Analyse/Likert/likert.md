@@ -2,6 +2,16 @@
 jcb  
 24 juin 2015  
 
+Matériel et méthode
+===================
+
+L'ensemble des apprenants sont divisés en 2 groupes selon qu'ils ont bénéficié ou non d'un prébriefing. La répartition entre ces 2 groupes s'est faite aléatoirement. Le _sentiment d'efficacité personnel_ (SEP) de chaque participant a été évalué par un questionnaire comportant 12 items de likert gradués de 1 à 8. Ce questionnaire a été soumis à chaque participant avant la formation (pré-test) et à l'issue de celle-ci (post-test). Cinq questions à choix multiple précisent le profil du candidat. Le consentement éclairé des participant a été recueilli (?).
+
+Les données pré-test et post-test des 12 items avec échelle de Likert et des 5 questions à choix multiple ont été saisie dans un tableur (Exel) et importées dans le logiciel R version 3.1.3 (2015-03-09) pour être analysées.
+
+Toutes les caractéristiques du groupes sont de nature qualitative. Le test utilisé pour les comparer est le __test du Chi2__ (avec correction de continuité de Yates). Cependant les effectifs sont faibles et lorsque les conditions d’application du Chi2 ne sont pas respectées, des effectifs ont été regroupés (années d’étude) et/ou le __test exact de Fisher__ a été utilisé. Les groupes sont considérés comme différents si p-value est plus petite que 0.05.
+
+Le score de Likert est calculé en sommant les items de Likert. Deux scores sont étudiés selon que la somme des items porte sur les 8 premiers (échelle éprouvée) ou sur les 12 items (échelle expérimentale). Les moyennes des échelles de Likert des 2 groupes sont comparées à l'aide du __test de Student__. Les comparaisons pré-test / post-test des moyennes des scores utilisent le __test de Student pour séries appariées__. Un différence inférieure à 5% (p < 0.05) a été considérée comme significative.
 
 Lecture des fichiers
 ====================
@@ -58,7 +68,7 @@ Sexe  N  O
    F 17 17
    M 12 10
 ```
-La répartition des hommes et des femmes est identique dans deux groupes (p = 0.953
+La répartition des hommes et des femmes est identique dans deux groupes (p = 0.95
 )
 
 SMI (situation de mort inattendue)
@@ -72,7 +82,7 @@ SMI                           N  O
   plusieurs fois par mois     3  2
   plusieurs fois par semaine  0  2
 ```
-Pas de différence entre les deux groupes (p = 0.557)
+Pas de différence entre les deux groupes (p = 0.56)
 
 FDP formation décès patient
 ---------------------------
@@ -83,7 +93,7 @@ FDP  N  O
   N 16 20
   O 13  7
 ```
-Pas de différence entre les deux groupes (p = 0.232)
+Pas de différence entre les deux groupes (p = 0.23)
 
 FMN formation annonce mauvaise nouvelle
 ---------------------------------------
@@ -94,7 +104,7 @@ FMN  N  O
   N  7 16
   O 22 11
 ```
-__Différence significative__ entre les deux groupes (p = 0.016)
+__Différence significative__ entre les deux groupes (p = 0.02)
 
 Profession
 ----------
@@ -106,7 +116,7 @@ PROF        N  O
   DESC MU   0  1
   ETUDIANT 25 25
 ```
-Pas de différence entre les deux groupes (p = 0.557)
+Pas de différence entre les deux groupes (p = 0.56)
 
 Rôle dans la simulation
 -----------------------
@@ -141,7 +151,7 @@ Années d'études  N  O
 moins de 6 ans  4  2
 6 ans ou plus  25 24
 ```
-Pas de différence entre les deux groupes (p = 0.672)
+Pas de différence entre les deux groupes (p = 0.67)
 
 __Conclusion: les groupes avec et sans prébriefing ne sont pas différents sauf en ce qui concerne la formation à l'annonce d'une mauvaise nouvelle.__
 
@@ -156,20 +166,38 @@ Pré-test
 ### SEP8
 ![](likert_files/figure-html/sep_avant_sep8-1.png) ![](likert_files/figure-html/sep_avant_sep8-2.png) 
 
-- moyenne SEP8: $30.4 \pm{8.4}$
-- médiane SEP8: $30$
+#### SEP (Score de Likert) avant la formation:
+
+- Ensemble du groupe:
+    - moyenne SEP8: $30.4 \pm{8.4}$
+    - médiane SEP8: $30$
+- Sous-groupe sans prebriefing
+    - moyenne: $31.28 \pm{8.12}$
+    - médiane: $32$
+- Sous-groupe avec prebriefing
+    - moyenne: $29.41 \pm{8.74}$
+    - médiane: $29$
 
 ### SEP12
 ![](likert_files/figure-html/sep_avant_sep12-1.png) 
 
-- moyenne SEP12: $53.7 \pm{9.301}}$
-- médiane SEP12: $54$
+#### SEP (Score de Likert) avant la formation:
 
-Comparaison du SEP avant la formation, selon que les apprenants aient bénéficiés ou non d'un prébriefing (Test T de Student):
+- Ensemble du groupe:
+    - moyenne SEP12: $53.7 \pm{9.3}$
+    - médiane SEP12: $54$
+- Sous-groupe sans prebriefing
+    - moyenne: $54.5 \pm{8.96}$
+    - médiane: $54$
+- Sous-groupe avec prebriefing
+    - moyenne: $52.85 \pm{9.74}$
+    - médiane: $55$
+
+#### Comparaison du SEP avant la formation, selon que les apprenants aient bénéficiés ou non d'un prébriefing (Test T de Student):
 
 
-- SEP8: pas de différence (p = 0.412)
-- SEP12: pas de différence (p = 0.517)
+- SEP8: pas de différence (p = 0.41)
+- SEP12: pas de différence (p = 0.52)
 
 
 
@@ -178,131 +206,81 @@ __Conclusion__: les groupes ne sont pas différents en ce qui concerne le sentim
 Post-test
 -----------------------
 
-```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    11.0    31.0    36.0    36.7    44.0    55.0
-```
 
-```
-## [1] 9.41
-```
 
-![](likert_files/figure-html/SEP_apres-1.png) 
+### SEP8 (après)
 
-```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    27.0    53.0    61.0    59.6    69.0    78.0
-```
+![](likert_files/figure-html/sep8après-1.png) 
 
-```
-## [1] 11.1
-```
+#### SEP (Score de Likert) après la formation:
 
-![](likert_files/figure-html/SEP_apres-2.png) 
+- Ensemble du groupe:
+    - moyenne SEP8: $36.7 \pm{9.41}$
+    - médiane SEP8: $36$
+- Sous-groupe sans prebriefing
+    - moyenne: $37.76 \pm{8.5}$
+    - médiane: $36$
+- Sous-groupe avec prebriefing
+    - moyenne: $35.52 \pm{10.32}$
+    - médiane: $36$
+    
+### SEP12 (après)
 
-```
-## 
-## 	Welch Two Sample t-test
-## 
-## data:  SEP8 by PREB
-## t = 0.883, df = 50.5, p-value = 0.3816
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -2.86  7.34
-## sample estimates:
-## mean in group N mean in group O 
-##            37.8            35.5
-```
+![](likert_files/figure-html/sep12APRES-1.png) 
 
-```
-## 
-## 	Welch Two Sample t-test
-## 
-## data:  SEP12 by PREB
-## t = 0.989, df = 49.8, p-value = 0.3274
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -3.05  8.98
-## sample estimates:
-## mean in group N mean in group O 
-##              61              58
-```
+#### SEP (Score de Likert) après la formation:
+
+- Ensemble du groupe:
+    - moyenne SEP12: $59.6 \pm{11.11}$
+    - médiane SEP12: $61$
+- Sous-groupe sans prebriefing
+    - moyenne: $61 \pm{9.85}$
+    - médiane: $60$
+- Sous-groupe avec prebriefing
+    - moyenne: $58.04 \pm{12.32}$
+    - médiane: $62$
+
+#### Comparaison du SEP après la formation, selon que les apprenants aient bénéficiés ou non d'un prébriefing (Test T de Student):
+
+
+
+- SEP8: pas de différence (p = 0.38)
+- SEP12: pas de différence (p = 0.33)
 
 __Conclusion__: après la formation, le SEP à progressé mais dans les mêmes proportions dans les deux groupes et il n'y a pas de différence de entre les SEP que le groupe ait bénéficié ou pas d'un prébriefing. 
 
+
 Est-ce que la formation a une influence sur le SEP?
 ----------------------------------------------------
-Pour répondre à la question, on compare le SEP avant et après la formation:
+Pour répondre à la question, on compare le SEP avant et après la formation (test de Student por séries appariées):
 
 ### SEP12
 
-- SEP12: __différence très significative__ (p = 0.003)
+
+- SEP12: __différence très significative__ (p = 0)
 
 ### SEP8
 
-- le score SEP8 est passé de 30.375 avant la formation à 36.679 après.
-- SEP8: __différence très significative__ (p = 2.952\times 10^{-4})
+
+
+- SEP8: __différence très significative__ (p = 0)
 
 __Conclusion__: dans les 2 cas le SEP progresse fortement et significativement. La formation a un effet positif sur l'évolution du SEP. 
 
-### Analyse en sous groupes: A suivre...
+### Analyse en sous groupes
 
 
-```
 
-	Welch Two Sample t-test
+#### SEP8
+- sous-groupe avec prébriefing: SEP8 avant = 29.41, SEP8 après = 35.52, p = 0
+- sous-groupe sans prébriefing: SEP8 avant = 31.28, SEP8 après = 37.76, p = 0
 
-data:  lk.av$SEP8[lk.av$PREB == "O"] and lk.ap$SEP8[lk.ap$PREB == "O"]
-t = -2.35, df = 50.6, p-value = 0.02282
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -11.337  -0.885
-sample estimates:
-mean of x mean of y 
-     29.4      35.5 
-```
+#### SEP12
+- sous-groupe avec prébriefing: SEP12 avant = 52.85, SEP12 après = 58.04, p = 0
+- sous-groupe sans prébriefing: SEP12 avant = 54.5, SEP12 après = 61, p = 0
 
-```
+__Conclusion__: quuelque soit l'échelle utilisée, le SEP progresse fortement et significativement quelque soit le sous-groupe considéré. La formation a un effet positif sur l'évolution du SEP. 
 
-	Welch Two Sample t-test
-
-data:  lk.av$SEP8[lk.av$PREB == "N"] and lk.ap$SEP8[lk.ap$PREB == "N"]
-t = -2.97, df = 55.9, p-value = 0.004403
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -10.86  -2.11
-sample estimates:
-mean of x mean of y 
-     31.3      37.8 
-```
-
-```
-
-	Welch Two Sample t-test
-
-data:  lk.av$SEP12[lk.av$PREB == "O"] and lk.ap$SEP12[lk.ap$PREB == "O"]
-t = -1.72, df = 49.4, p-value = 0.09255
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -11.259   0.888
-sample estimates:
-mean of x mean of y 
-     52.9      58.0 
-```
-
-```
-
-	Welch Two Sample t-test
-
-data:  lk.av$SEP12[lk.av$PREB == "N"] and lk.ap$SEP12[lk.ap$PREB == "N"]
-t = -2.61, df = 54.8, p-value = 0.01174
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -11.5  -1.5
-sample estimates:
-mean of x mean of y 
-     54.5      61.0 
-```
 Evaluer le nombre de sujets nécessaires.
 
 Résultats préliminaires
@@ -312,93 +290,93 @@ Scores de Likert avant
 -----------------------
 
 ```
-##      Item     1     2     3     4     5     6     7     8
-## 1   Q1.av 14.29 25.00 25.00 17.86 14.29  3.57  0.00  0.00
-## 2   Q2.av 21.43 35.71 21.43  8.93 12.50  0.00  0.00  0.00
-## 3   Q3.av  3.57 12.50 16.07 32.14 14.29 16.07  1.79  3.57
-## 4   Q4.av  1.79  7.14 16.07 14.29 14.29 26.79 12.50  7.14
-## 5   Q5.av 14.29 25.00 23.21 30.36  5.36  1.79  0.00  0.00
-## 6   Q6.av  5.36 16.07 21.43 16.07 19.64 19.64  1.79  0.00
-## 7   Q7.av  3.57  1.79 14.29 19.64 23.21 23.21 10.71  3.57
-## 8   Q8.av  5.36 14.29 23.21 23.21 16.07 12.50  3.57  1.79
-## 9   Q9.av  1.82  5.45  7.27  9.09 16.36 29.09 20.00 10.91
-## 10 Q10.av  0.00  0.00  0.00  5.36  0.00 19.64 35.71 39.29
-## 11 Q11.av  3.57  7.14 12.50  3.57 23.21 21.43 21.43  7.14
-## 12 Q12.av  1.79 14.29  8.93  5.36  1.79 21.43 21.43 25.00
+##      Item    1    2    3    4    5    6    7    8
+## 1   Q1.av 14.3 25.0 25.0 17.9 14.3  3.6  0.0  0.0
+## 2   Q2.av 21.4 35.7 21.4  8.9 12.5  0.0  0.0  0.0
+## 3   Q3.av  3.6 12.5 16.1 32.1 14.3 16.1  1.8  3.6
+## 4   Q4.av  1.8  7.1 16.1 14.3 14.3 26.8 12.5  7.1
+## 5   Q5.av 14.3 25.0 23.2 30.4  5.4  1.8  0.0  0.0
+## 6   Q6.av  5.4 16.1 21.4 16.1 19.6 19.6  1.8  0.0
+## 7   Q7.av  3.6  1.8 14.3 19.6 23.2 23.2 10.7  3.6
+## 8   Q8.av  5.4 14.3 23.2 23.2 16.1 12.5  3.6  1.8
+## 9   Q9.av  1.8  5.5  7.3  9.1 16.4 29.1 20.0 10.9
+## 10 Q10.av  0.0  0.0  0.0  5.4  0.0 19.6 35.7 39.3
+## 11 Q11.av  3.6  7.1 12.5  3.6 23.2 21.4 21.4  7.1
+## 12 Q12.av  1.8 14.3  8.9  5.4  1.8 21.4 21.4 25.0
 ```
 
 ![](likert_files/figure-html/score_avant-1.png) 
 
 ```
-##      Q1.av          Q2.av          Q3.av          Q4.av     
-##  Min.   :1.00   Min.   :1.00   Min.   :1.00   Min.   :1.00  
-##  1st Qu.:2.00   1st Qu.:2.00   1st Qu.:3.00   1st Qu.:3.75  
-##  Median :3.00   Median :2.00   Median :4.00   Median :5.00  
-##  Mean   :3.04   Mean   :2.55   Mean   :4.14   Mean   :4.98  
-##  3rd Qu.:4.00   3rd Qu.:3.00   3rd Qu.:5.00   3rd Qu.:6.00  
-##  Max.   :6.00   Max.   :5.00   Max.   :8.00   Max.   :8.00  
-##                                                             
-##      Q5.av          Q6.av          Q7.av          Q8.av     
-##  Min.   :1.00   Min.   :1.00   Min.   :1.00   Min.   :1.00  
-##  1st Qu.:2.00   1st Qu.:3.00   1st Qu.:4.00   1st Qu.:3.00  
-##  Median :3.00   Median :4.00   Median :5.00   Median :4.00  
-##  Mean   :2.93   Mean   :3.95   Mean   :4.88   Mean   :3.91  
-##  3rd Qu.:4.00   3rd Qu.:5.00   3rd Qu.:6.00   3rd Qu.:5.00  
-##  Max.   :6.00   Max.   :7.00   Max.   :8.00   Max.   :8.00  
-##                                                             
-##      Q9.av          Q10.av         Q11.av         Q12.av    
-##  Min.   :1.00   Min.   :4.00   Min.   :1.00   Min.   :1.00  
-##  1st Qu.:5.00   1st Qu.:6.75   1st Qu.:4.00   1st Qu.:3.75  
-##  Median :6.00   Median :7.00   Median :5.50   Median :6.00  
-##  Mean   :5.55   Mean   :7.04   Mean   :5.21   Mean   :5.66  
-##  3rd Qu.:7.00   3rd Qu.:8.00   3rd Qu.:7.00   3rd Qu.:7.25  
-##  Max.   :8.00   Max.   :8.00   Max.   :8.00   Max.   :8.00  
-##  NA's   :1
+##      Q1.av       Q2.av         Q3.av         Q4.av         Q5.av    
+##  Min.   :1   Min.   :1.0   Min.   :1.0   Min.   :1.0   Min.   :1.0  
+##  1st Qu.:2   1st Qu.:2.0   1st Qu.:3.0   1st Qu.:3.8   1st Qu.:2.0  
+##  Median :3   Median :2.0   Median :4.0   Median :5.0   Median :3.0  
+##  Mean   :3   Mean   :2.6   Mean   :4.1   Mean   :5.0   Mean   :2.9  
+##  3rd Qu.:4   3rd Qu.:3.0   3rd Qu.:5.0   3rd Qu.:6.0   3rd Qu.:4.0  
+##  Max.   :6   Max.   :5.0   Max.   :8.0   Max.   :8.0   Max.   :6.0  
+##                                                                     
+##      Q6.av         Q7.av         Q8.av         Q9.av         Q10.av   
+##  Min.   :1.0   Min.   :1.0   Min.   :1.0   Min.   :1.0   Min.   :4.0  
+##  1st Qu.:3.0   1st Qu.:4.0   1st Qu.:3.0   1st Qu.:5.0   1st Qu.:6.8  
+##  Median :4.0   Median :5.0   Median :4.0   Median :6.0   Median :7.0  
+##  Mean   :3.9   Mean   :4.9   Mean   :3.9   Mean   :5.5   Mean   :7.0  
+##  3rd Qu.:5.0   3rd Qu.:6.0   3rd Qu.:5.0   3rd Qu.:7.0   3rd Qu.:8.0  
+##  Max.   :7.0   Max.   :8.0   Max.   :8.0   Max.   :8.0   Max.   :8.0  
+##                                            NA's   :1                  
+##      Q11.av        Q12.av   
+##  Min.   :1.0   Min.   :1.0  
+##  1st Qu.:4.0   1st Qu.:3.8  
+##  Median :5.5   Median :6.0  
+##  Mean   :5.2   Mean   :5.7  
+##  3rd Qu.:7.0   3rd Qu.:7.2  
+##  Max.   :8.0   Max.   :8.0  
+## 
 ```
 
 Score de Likert après
 ---------------------
 
 ```
-##      Item    1     2     3     4     5     6     7     8
-## 1   Q1.ap 8.93 12.50 19.64 16.07 32.14  8.93  1.79  0.00
-## 2   Q2.ap 5.36 17.86 23.21 19.64 23.21  5.36  5.36  0.00
-## 3   Q3.ap 1.79  7.14  8.93 14.29 19.64 26.79 12.50  8.93
-## 4   Q4.ap 1.79  1.79  3.57 17.86 14.29 26.79 23.21 10.71
-## 5   Q5.ap 3.57  7.14 23.21 21.43 37.50  7.14  0.00  0.00
-## 6   Q6.ap 3.57  5.36 16.07 21.43 25.00 26.79  1.79  0.00
-## 7   Q7.ap 0.00  5.36  5.36 28.57 19.64 16.07 19.64  5.36
-## 8   Q8.ap 3.57  5.36 14.29 19.64 32.14 16.07  7.14  1.79
-## 9   Q9.ap 1.79  3.57  7.14  5.36 19.64 28.57 23.21 10.71
-## 10 Q10.ap 0.00  1.79  1.79  0.00  7.14 14.29 37.50 37.50
-## 11 Q11.ap 5.36 10.71 10.71  8.93 16.07 30.36 14.29  3.57
-## 12 Q12.ap 1.79 10.71  8.93  5.36 17.86 23.21 16.07 16.07
+##      Item   1    2    3    4    5    6    7    8
+## 1   Q1.ap 8.9 12.5 19.6 16.1 32.1  8.9  1.8  0.0
+## 2   Q2.ap 5.4 17.9 23.2 19.6 23.2  5.4  5.4  0.0
+## 3   Q3.ap 1.8  7.1  8.9 14.3 19.6 26.8 12.5  8.9
+## 4   Q4.ap 1.8  1.8  3.6 17.9 14.3 26.8 23.2 10.7
+## 5   Q5.ap 3.6  7.1 23.2 21.4 37.5  7.1  0.0  0.0
+## 6   Q6.ap 3.6  5.4 16.1 21.4 25.0 26.8  1.8  0.0
+## 7   Q7.ap 0.0  5.4  5.4 28.6 19.6 16.1 19.6  5.4
+## 8   Q8.ap 3.6  5.4 14.3 19.6 32.1 16.1  7.1  1.8
+## 9   Q9.ap 1.8  3.6  7.1  5.4 19.6 28.6 23.2 10.7
+## 10 Q10.ap 0.0  1.8  1.8  0.0  7.1 14.3 37.5 37.5
+## 11 Q11.ap 5.4 10.7 10.7  8.9 16.1 30.4 14.3  3.6
+## 12 Q12.ap 1.8 10.7  8.9  5.4 17.9 23.2 16.1 16.1
 ```
 
 ![](likert_files/figure-html/score_apres-1.png) 
 
 ```
-##      Q1.ap          Q2.ap          Q3.ap          Q4.ap     
-##  Min.   :1.00   Min.   :1.00   Min.   :1.00   Min.   :1.00  
-##  1st Qu.:3.00   1st Qu.:3.00   1st Qu.:4.00   1st Qu.:4.75  
-##  Median :4.00   Median :4.00   Median :5.00   Median :6.00  
-##  Mean   :3.84   Mean   :3.75   Mean   :5.18   Mean   :5.68  
-##  3rd Qu.:5.00   3rd Qu.:5.00   3rd Qu.:6.00   3rd Qu.:7.00  
-##  Max.   :7.00   Max.   :7.00   Max.   :8.00   Max.   :8.00  
-##      Q5.ap          Q6.ap          Q7.ap          Q8.ap          Q9.ap    
-##  Min.   :1.00   Min.   :1.00   Min.   :2.00   Min.   :1.00   Min.   :1.0  
-##  1st Qu.:3.00   1st Qu.:3.75   1st Qu.:4.00   1st Qu.:4.00   1st Qu.:5.0  
-##  Median :4.00   Median :5.00   Median :5.00   Median :5.00   Median :6.0  
-##  Mean   :4.04   Mean   :4.46   Mean   :5.16   Mean   :4.57   Mean   :5.7  
-##  3rd Qu.:5.00   3rd Qu.:6.00   3rd Qu.:6.25   3rd Qu.:5.25   3rd Qu.:7.0  
-##  Max.   :6.00   Max.   :7.00   Max.   :8.00   Max.   :8.00   Max.   :8.0  
-##      Q10.ap         Q11.ap         Q12.ap    
-##  Min.   :2.00   Min.   :1.00   Min.   :1.00  
-##  1st Qu.:6.75   1st Qu.:3.00   1st Qu.:4.00  
-##  Median :7.00   Median :5.00   Median :6.00  
-##  Mean   :6.93   Mean   :4.86   Mean   :5.41  
-##  3rd Qu.:8.00   3rd Qu.:6.00   3rd Qu.:7.00  
-##  Max.   :8.00   Max.   :8.00   Max.   :8.00
+##      Q1.ap         Q2.ap         Q3.ap         Q4.ap         Q5.ap  
+##  Min.   :1.0   Min.   :1.0   Min.   :1.0   Min.   :1.0   Min.   :1  
+##  1st Qu.:3.0   1st Qu.:3.0   1st Qu.:4.0   1st Qu.:4.8   1st Qu.:3  
+##  Median :4.0   Median :4.0   Median :5.0   Median :6.0   Median :4  
+##  Mean   :3.8   Mean   :3.8   Mean   :5.2   Mean   :5.7   Mean   :4  
+##  3rd Qu.:5.0   3rd Qu.:5.0   3rd Qu.:6.0   3rd Qu.:7.0   3rd Qu.:5  
+##  Max.   :7.0   Max.   :7.0   Max.   :8.0   Max.   :8.0   Max.   :6  
+##      Q6.ap         Q7.ap         Q8.ap         Q9.ap         Q10.ap   
+##  Min.   :1.0   Min.   :2.0   Min.   :1.0   Min.   :1.0   Min.   :2.0  
+##  1st Qu.:3.8   1st Qu.:4.0   1st Qu.:4.0   1st Qu.:5.0   1st Qu.:6.8  
+##  Median :5.0   Median :5.0   Median :5.0   Median :6.0   Median :7.0  
+##  Mean   :4.5   Mean   :5.2   Mean   :4.6   Mean   :5.7   Mean   :6.9  
+##  3rd Qu.:6.0   3rd Qu.:6.2   3rd Qu.:5.2   3rd Qu.:7.0   3rd Qu.:8.0  
+##  Max.   :7.0   Max.   :8.0   Max.   :8.0   Max.   :8.0   Max.   :8.0  
+##      Q11.ap        Q12.ap   
+##  Min.   :1.0   Min.   :1.0  
+##  1st Qu.:3.0   1st Qu.:4.0  
+##  Median :5.0   Median :6.0  
+##  Mean   :4.9   Mean   :5.4  
+##  3rd Qu.:6.0   3rd Qu.:7.0  
+##  Max.   :8.0   Max.   :8.0
 ```
 
 
@@ -418,8 +396,8 @@ summary(likert(q1a,nlevels = 8))
 ```
 
 ```
-##    Item  low neutral high mean   sd
-## 1 Q1.av 82.1       0 17.9 3.04 1.39
+##    Item low neutral high mean  sd
+## 1 Q1.av  82       0   18    3 1.4
 ```
 
 ```r
@@ -428,8 +406,8 @@ likert(q1a, nlevels = 8)
 ```
 
 ```
-##    Item    1  2  3    4    5    6 7 8
-## 1 Q1.av 14.3 25 25 17.9 14.3 3.57 0 0
+##    Item  1  2  3  4  5   6 7 8
+## 1 Q1.av 14 25 25 18 14 3.6 0 0
 ```
 
 ```r
@@ -478,9 +456,9 @@ summary(likert(q1, nlevels = 8))
 ```
 
 ```
-##    Item  low neutral high mean   sd
-## 1 Q1.Ap 57.1       0 42.9 3.84 1.53
-## 2 Q1.Av 82.1       0 17.9 3.04 1.39
+##    Item low neutral high mean  sd
+## 1 Q1.Ap  57       0   43  3.8 1.5
+## 2 Q1.Av  82       0   18  3.0 1.4
 ```
 
 ```r
@@ -499,7 +477,7 @@ chisq.test(d[, 1:6])
 ## 	Pearson's Chi-squared test
 ## 
 ## data:  d[, 1:6]
-## X-squared = 16.6, df = 5, p-value = 0.005371
+## X-squared = 17, df = 5, p-value = 0.005371
 ```
 
 Cronbach alpha
@@ -635,7 +613,7 @@ summary(lkt$score.av)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    13.0    23.0    30.0    30.4    38.0    50.0
+##      13      23      30      30      38      50
 ```
 
 ```r
@@ -644,7 +622,7 @@ summary(lkt$score.ap)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    11.0    31.0    36.0    36.7    44.0    55.0
+##      11      31      36      37      44      55
 ```
 
 ```r
@@ -666,13 +644,13 @@ t.test(score.av ~ PREB, data = lkt)
 ## 	Welch Two Sample t-test
 ## 
 ## data:  score.av by PREB
-## t = 0.827, df = 52.9, p-value = 0.4119
+## t = 0.83, df = 53, p-value = 0.4119
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -2.66  6.40
+##  -2.7  6.4
 ## sample estimates:
 ## mean in group N mean in group O 
-##            31.3            29.4
+##              31              29
 ```
 
 ```r
@@ -691,13 +669,13 @@ t.test(score.ap ~ PREB, data = lkt)
 ## 	Welch Two Sample t-test
 ## 
 ## data:  score.ap by PREB
-## t = 0.883, df = 50.5, p-value = 0.3816
+## t = 0.88, df = 51, p-value = 0.3816
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -2.86  7.34
+##  -2.9  7.3
 ## sample estimates:
 ## mean in group N mean in group O 
-##            37.8            35.5
+##              38              36
 ```
 
 ```r
@@ -748,8 +726,8 @@ tapply(score.av, Groupe_ID, mean)
 ```
 
 ```
-##    1    2    3    4    5    6    7    8 
-## 36.0 42.0 30.2 31.4 31.2 28.0 27.4 25.6
+##  1  2  3  4  5  6  7  8 
+## 36 42 30 31 31 28 27 26
 ```
 
 ```r
@@ -757,8 +735,8 @@ tapply(score.ap, Groupe_ID, mean)
 ```
 
 ```
-##    1    2    3    4    5    6    7    8 
-## 44.2 47.8 36.8 36.2 35.8 39.0 30.4 34.1
+##  1  2  3  4  5  6  7  8 
+## 44 48 37 36 36 39 30 34
 ```
 
 ```r
@@ -767,15 +745,15 @@ tapply(score.av, list(Groupe_ID, lkt$PREB), mean)
 ```
 
 ```
-##      N    O
-## 1 36.0   NA
-## 2   NA 42.0
-## 3   NA 30.2
-## 4 31.4   NA
-## 5 31.2   NA
-## 6 28.0   NA
-## 7   NA 27.4
-## 8   NA 25.6
+##    N  O
+## 1 36 NA
+## 2 NA 42
+## 3 NA 30
+## 4 31 NA
+## 5 31 NA
+## 6 28 NA
+## 7 NA 27
+## 8 NA 26
 ```
 
 ```r
@@ -783,15 +761,15 @@ tapply(score.ap, list(Groupe_ID, lkt$PREB), mean)
 ```
 
 ```
-##      N    O
-## 1 44.2   NA
-## 2   NA 47.8
-## 3   NA 36.8
-## 4 36.2   NA
-## 5 35.8   NA
-## 6 39.0   NA
-## 7   NA 30.4
-## 8   NA 34.1
+##    N  O
+## 1 44 NA
+## 2 NA 48
+## 3 NA 37
+## 4 36 NA
+## 5 36 NA
+## 6 39 NA
+## 7 NA 30
+## 8 NA 34
 ```
 
 Information de session
@@ -813,16 +791,17 @@ attached base packages:
 
 other attached packages:
 [1] epicalc_2.15.1.0 nnet_7.3-10      MASS_7.3-42      survival_2.38-3 
-[5] foreign_0.8-65   likert_1.2       xtable_1.7-4     ggplot2_1.0.1   
+[5] foreign_0.8-65   knitr_1.10.5     likert_1.2       xtable_1.7-4    
+[9] ggplot2_1.0.1   
 
 loaded via a namespace (and not attached):
  [1] colorspace_1.2-6 digest_0.6.8     evaluate_0.7     formatR_1.2     
  [5] grid_3.1.3       gridExtra_0.9.1  gtable_0.1.2     htmltools_0.2.6 
- [9] knitr_1.10.5     labeling_0.3     magrittr_1.5     mnormt_1.5-3    
-[13] munsell_0.4.2    parallel_3.1.3   plyr_1.8.3       proto_0.3-10    
-[17] psych_1.5.4      Rcpp_0.11.6      reshape_0.8.5    reshape2_1.4.1  
-[21] rmarkdown_0.7    scales_0.2.5     splines_3.1.3    stringi_0.5-5   
-[25] stringr_1.0.0    tools_3.1.3      yaml_2.1.13     
+ [9] labeling_0.3     magrittr_1.5     mnormt_1.5-3     munsell_0.4.2   
+[13] parallel_3.1.3   plyr_1.8.3       proto_0.3-10     psych_1.5.4     
+[17] Rcpp_0.11.6      reshape_0.8.5    reshape2_1.4.1   rmarkdown_0.7   
+[21] scales_0.2.5     splines_3.1.3    stringi_0.5-5    stringr_1.0.0   
+[25] tools_3.1.3      yaml_2.1.13     
 ```
 
 ```

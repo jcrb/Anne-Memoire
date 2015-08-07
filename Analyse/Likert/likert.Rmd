@@ -11,13 +11,24 @@ output:
     toc: yes
 ---
 
+Matériel et méthode
+===================
+
+L'ensemble des apprenants sont divisés en 2 groupes selon qu'ils ont bénéficié ou non d'un prébriefing. La répartition entre ces 2 groupes s'est faite aléatoirement. Le _sentiment d'efficacité personnel_ (SEP) de chaque participant a été évalué par un questionnaire comportant 12 items de likert gradués de 1 à 8. Ce questionnaire a été soumis à chaque participant avant la formation (pré-test) et à l'issue de celle-ci (post-test). Cinq questions à choix multiple précisent le profil du candidat. Le consentement éclairé des participant a été recueilli (?).
+
+Les données pré-test et post-test des 12 items avec échelle de Likert et des 5 questions à choix multiple ont été saisie dans un tableur (Exel) et importées dans le logiciel R version 3.1.3 (2015-03-09) pour être analysées.
+
+Toutes les caractéristiques du groupes sont de nature qualitative. Le test utilisé pour les comparer est le __test du Chi2__ (avec correction de continuité de Yates). Cependant les effectifs sont faibles et lorsque les conditions d’application du Chi2 ne sont pas respectées, des effectifs ont été regroupés (années d’étude) et/ou le __test exact de Fisher__ a été utilisé. Les groupes sont considérés comme différents si p-value est plus petite que 0.05.
+
+Le score de Likert est calculé en sommant les items de Likert. Deux scores sont étudiés selon que la somme des items porte sur les 8 premiers (échelle éprouvée) ou sur les 12 items (échelle expérimentale). Les moyennes des échelles de Likert des 2 groupes sont comparées à l'aide du __test de Student__. Les comparaisons pré-test / post-test des moyennes des scores utilisent le __test de Student pour séries appariées__. Un différence inférieure à 5% (p < 0.05) a été considérée comme significative.
 
 Lecture des fichiers
 ====================
 
 ```{r init, echo=FALSE, comment="", message=FALSE}
 library(likert)
-options(digits = 3)
+library(knitr)
+options(scipen = 10, digits = 2)
 
 path <- "../../" # path <- "" en mode console
 
@@ -159,11 +170,11 @@ Le SEP est mesuré sur les 8 premiers items du score de Likert (validé) et sur 
 Pré-test
 -----------------------
 ```{r sep_avant, echo=FALSE}
-# Ajout d'une colonne SEP12 au fichier lk.av (SEP expérimental)
+# Ajout d'une colonne SEP12 au fichier lk.av (SEP expérimental) = score de Likert pour 12 items
 lk.av$SEP12 <- apply(lk.av[4:15], 1, sum)
-# Ajout d'une colonne SEP8 au fichier lk.av (SEP validé)
+# Ajout d'une colonne SEP8 au fichier lk.av (SEP validé) = score de Likert pour 8 items
 lk.av$SEP8 <- apply(lk.av[4:11], 1, sum)
-# ajout colonne PREB
+# ajout colonne PREB pour distinguer ceux ayant bénéficiés d'un prébriefing
 lk.av$PREB[lk.av$Groupe_ID %in% c(2, 3, 7, 8)] <- "O"
 lk.av$PREB[lk.av$Groupe_ID %in% c(1,4,5, 6)] <- "N"
 ```
@@ -178,10 +189,23 @@ hist(lk.av$SEP8, xlab = "SEP 8", ylab = "Fréquence", main = "Histogramme des sc
 # box plot
 boxplot(SEP8 ~ PREB, data = lk.av, ylab = "SEP8", xlab = "Pré-briefing", main = "Score SEP8 avant la formation", col = "cornflowerblue")
 
+# analyse en sous-groupes
+t.av.mean <- tapply(lk.av$SEP8, lk.av$PREB, mean, na.rm = TRUE)
+t.av.sd <- tapply(lk.av$SEP8, lk.av$PREB, sd, na.rm = TRUE)
+t.av.median <- tapply(lk.av$SEP8, lk.av$PREB, median, na.rm = TRUE)
 ```
 
-- moyenne SEP8: $`r s["Mean"]` \pm{`r sd`}$
-- médiane SEP8: $`r s["Median"]`$
+#### SEP (Score de Likert) avant la formation:
+
+- Ensemble du groupe:
+    - moyenne SEP8: $`r s["Mean"]` \pm{`r sd`}$
+    - médiane SEP8: $`r s["Median"]`$
+- Sous-groupe sans prebriefing
+    - moyenne: $`r t.av.mean[1]` \pm{`r t.av.sd[1]`}$
+    - médiane: $`r t.av.median[1]`$
+- Sous-groupe avec prebriefing
+    - moyenne: $`r t.av.mean[2]` \pm{`r t.av.sd[2]`}$
+    - médiane: $`r t.av.median[2]`$
 
 ### SEP12
 ```{r sep_avant_sep12, echo=FALSE}
@@ -189,12 +213,26 @@ boxplot(SEP8 ~ PREB, data = lk.av, ylab = "SEP8", xlab = "Pré-briefing", main =
 s <- summary(lk.av$SEP12)
 sd <- sd(lk.av$SEP12, na.rm = TRUE)
 hist(lk.av$SEP12, xlab = "SEP 12", ylab = "Fréquence", main = "Histogramme des scores de Likert avant (12 items)", col = "palegreen", border = "white")
+
+# analyse en sous-groupes
+t.av.mean <- tapply(lk.av$SEP12, lk.av$PREB, mean, na.rm = TRUE)
+t.av.sd <- tapply(lk.av$SEP12, lk.av$PREB, sd, na.rm = TRUE)
+t.av.median <- tapply(lk.av$SEP12, lk.av$PREB, median, na.rm = TRUE)
 ```
 
-- moyenne SEP12: $`r s["Mean"]` \pm{`r sd`}}$
-- médiane SEP12: $`r s["Median"]`$
+#### SEP (Score de Likert) avant la formation:
 
-Comparaison du SEP avant la formation, selon que les apprenants aient bénéficiés ou non d'un prébriefing (Test T de Student):
+- Ensemble du groupe:
+    - moyenne SEP12: $`r s["Mean"]` \pm{`r sd`}$
+    - médiane SEP12: $`r s["Median"]`$
+- Sous-groupe sans prebriefing
+    - moyenne: $`r t.av.mean[1]` \pm{`r t.av.sd[1]`}$
+    - médiane: $`r t.av.median[1]`$
+- Sous-groupe avec prebriefing
+    - moyenne: $`r t.av.mean[2]` \pm{`r t.av.sd[2]`}$
+    - médiane: $`r t.av.median[2]`$
+
+#### Comparaison du SEP avant la formation, selon que les apprenants aient bénéficiés ou non d'un prébriefing (Test T de Student):
 
 ```{r ttest_pre, echo=FALSE, comment=""}
 # comparaisons des groupes avec et sans prébriefing
@@ -210,6 +248,7 @@ __Conclusion__: les groupes ne sont pas différents en ce qui concerne le sentim
 
 Post-test
 -----------------------
+
 ```{r SEP_apres, echo=FALSE}
 # Ajout d'une colonne SEP12 au fichier lk.av (SEP expérimental)
 lk.ap$SEP12 <- apply(lk.ap[4:15], 1, sum)
@@ -218,49 +257,102 @@ lk.ap$SEP8 <- apply(lk.ap[4:11], 1, sum)
 # ajout colonne PREB
 lk.ap$PREB[lk.ap$Groupe_ID %in% c(2, 3, 7, 8)] <- "O"
 lk.ap$PREB[lk.ap$Groupe_ID %in% c(1,4,5, 6)] <- "N"
+```
 
+### SEP8 (après)
+
+```{r sep8après, echo=FALSE}
 # analyse SEP8
+s <- summary(lk.ap$SEP8)
+sd <- sd(lk.ap$SEP8)
 
-summary(lk.ap$SEP8)
-sd(lk.ap$SEP8)
-hist(lk.ap$SEP8, xlab = "SEP 8", ylab = "Fréquence", main = "Histogramme des scores de Likert après(8 items)")
+hist(lk.ap$SEP8, xlab = "SEP 8", ylab = "Fréquence", main = "Histogramme des scores de Likert après (8 items)", col = "cornflowerblue")
 
+# analyse en sous-groupes
+t.ap.mean <- tapply(lk.ap$SEP8, lk.ap$PREB, mean, na.rm = TRUE)
+t.ap.sd <- tapply(lk.ap$SEP8, lk.ap$PREB, sd, na.rm = TRUE)
+t.ap.median <- tapply(lk.ap$SEP8, lk.ap$PREB, median, na.rm = TRUE)
+````
+
+#### SEP (Score de Likert) après la formation:
+
+- Ensemble du groupe:
+    - moyenne SEP8: $`r s["Mean"]` \pm{`r sd`}$
+    - médiane SEP8: $`r s["Median"]`$
+- Sous-groupe sans prebriefing
+    - moyenne: $`r t.ap.mean[1]` \pm{`r t.ap.sd[1]`}$
+    - médiane: $`r t.ap.median[1]`$
+- Sous-groupe avec prebriefing
+    - moyenne: $`r t.ap.mean[2]` \pm{`r t.ap.sd[2]`}$
+    - médiane: $`r t.ap.median[2]`$
+    
+### SEP12 (après)
+
+```{r sep12APRES, echo=FALSE}
 # analyse du SEP12
 
-summary(lk.ap$SEP12)
-sd(lk.ap$SEP12)
-hist(lk.ap$SEP12, xlab = "SEP 12", ylab = "Fréquence", main = "Histogramme des scores de Likert après (12 items)")
+s <- summary(lk.ap$SEP12)
+sd <- sd(lk.ap$SEP12)
 
-# comparaisons des groupes avec et sans prébriefing
-t.test(SEP8 ~ PREB, data = lk.ap)
-t.test(SEP12 ~ PREB, data = lk.ap)
+hist(lk.ap$SEP12, xlab = "SEP 12", ylab = "Fréquence", main = "Histogramme des scores de Likert après (12 items)", col = "palegreen")
+
+# analyse en sous-groupes
+t.ap.mean <- tapply(lk.ap$SEP12, lk.ap$PREB, mean, na.rm = TRUE)
+t.ap.sd <- tapply(lk.ap$SEP12, lk.ap$PREB, sd, na.rm = TRUE)
+t.ap.median <- tapply(lk.ap$SEP12, lk.ap$PREB, median, na.rm = TRUE)
 
 ```
 
+#### SEP (Score de Likert) après la formation:
+
+- Ensemble du groupe:
+    - moyenne SEP12: $`r s["Mean"]` \pm{`r sd`}$
+    - médiane SEP12: $`r s["Median"]`$
+- Sous-groupe sans prebriefing
+    - moyenne: $`r t.ap.mean[1]` \pm{`r t.ap.sd[1]`}$
+    - médiane: $`r t.ap.median[1]`$
+- Sous-groupe avec prebriefing
+    - moyenne: $`r t.ap.mean[2]` \pm{`r t.ap.sd[2]`}$
+    - médiane: $`r t.ap.median[2]`$
+
+#### Comparaison du SEP après la formation, selon que les apprenants aient bénéficiés ou non d'un prébriefing (Test T de Student):
+
+```{r compare_apres, echo=FALSE}
+# comparaisons des groupes avec et sans prébriefing
+t1 <- t.test(SEP8 ~ PREB, data = lk.ap)
+t2 <- t.test(SEP12 ~ PREB, data = lk.ap)
+```
+
+- SEP8: pas de différence (p = `r t1$p.value`)
+- SEP12: pas de différence (p = `r t2$p.value`)
+
 __Conclusion__: après la formation, le SEP à progressé mais dans les mêmes proportions dans les deux groupes et il n'y a pas de différence de entre les SEP que le groupe ait bénéficié ou pas d'un prébriefing. 
+
 
 Est-ce que la formation a une influence sur le SEP?
 ----------------------------------------------------
-Pour répondre à la question, on compare le SEP avant et après la formation:
+Pour répondre à la question, on compare le SEP avant et après la formation (test de Student por séries appariées):
 
 ### SEP12
+
 ```{r sep12_avap, echo=FALSE, comment=""}
 # SEP 12
-t <- t.test(lk.av$SEP12, lk.ap$SEP12)
+t <- t.test(lk.ap$SEP12, lk.av$SEP12, paired = TRUE)
 ```
 - SEP12: __différence très significative__ (p = `r t$p.value`)
 
 ### SEP8
+
 ```{r sep8_avap, echo=FALSE, comment=""}
 # SEP 8
-t <- t.test(lk.av$SEP8, lk.ap$SEP8)
+t <- t.test(lk.ap$SEP8, lk.av$SEP8, paired = TRUE)
 ```
-- le score SEP8 est passé de `r t$estimate[1]` avant la formation à `r t$estimate[2]` après.
+
 - SEP8: __différence très significative__ (p = `r t$p.value`)
 
 __Conclusion__: dans les 2 cas le SEP progresse fortement et significativement. La formation a un effet positif sur l'évolution du SEP. 
 
-### Analyse en sous groupes: A suivre...
+### Analyse en sous groupes
 
 ```{r sep_avap, echo=FALSE, comment=""}
 
@@ -268,15 +360,26 @@ __Conclusion__: dans les 2 cas le SEP progresse fortement et significativement. 
 
 # Analyse en sous-groupes:
 # avant avec prébriefing
-t.test(lk.av$SEP8[lk.av$PREB == "O"], lk.ap$SEP8[lk.ap$PREB == "O"])
+t1 <- t.test(lk.av$SEP8[lk.av$PREB == "O"], lk.ap$SEP8[lk.ap$PREB == "O"], paired = TRUE)
 # avant sans prébriefing
-t.test(lk.av$SEP8[lk.av$PREB == "N"], lk.ap$SEP8[lk.ap$PREB == "N"])
+t2 <- t.test(lk.av$SEP8[lk.av$PREB == "N"], lk.ap$SEP8[lk.ap$PREB == "N"], paired = TRUE)
 # après avec prebriefing
-t.test(lk.av$SEP12[lk.av$PREB == "O"], lk.ap$SEP12[lk.ap$PREB == "O"])
+t3 <- t.test(lk.av$SEP12[lk.av$PREB == "O"], lk.ap$SEP12[lk.ap$PREB == "O"], paired = TRUE)
 # après sans prébriefing
-t.test(lk.av$SEP12[lk.av$PREB == "N"], lk.ap$SEP12[lk.ap$PREB == "N"])
+t4 <- t.test(lk.av$SEP12[lk.av$PREB == "N"], lk.ap$SEP12[lk.ap$PREB == "N"], paired = TRUE)
 
 ```
+
+#### SEP8
+- sous-groupe avec prébriefing: SEP8 avant = `r mean(lk.av$SEP8[lk.av$PREB == "O"])`, SEP8 après = `r mean(lk.ap$SEP8[lk.av$PREB == "O"])`, p = `r t1$p.value`
+- sous-groupe sans prébriefing: SEP8 avant = `r mean(lk.av$SEP8[lk.av$PREB == "N"])`, SEP8 après = `r mean(lk.ap$SEP8[lk.av$PREB == "N"])`, p = `r t2$p.value`
+
+#### SEP12
+- sous-groupe avec prébriefing: SEP12 avant = `r mean(lk.av$SEP12[lk.av$PREB == "O"])`, SEP12 après = `r mean(lk.ap$SEP12[lk.av$PREB == "O"])`, p = `r t3$p.value`
+- sous-groupe sans prébriefing: SEP12 avant = `r mean(lk.av$SEP12[lk.av$PREB == "N"], na.rm = TRUE)`, SEP12 après = `r mean(lk.ap$SEP12[lk.ap$PREB == "N"], na.rm = TRUE)`, p = `r t4$p.value`
+
+__Conclusion__: quuelque soit l'échelle utilisée, le SEP progresse fortement et significativement quelque soit le sous-groupe considéré. La formation a un effet positif sur l'évolution du SEP. 
+
 Evaluer le nombre de sujets nécessaires.
 
 Résultats préliminaires
